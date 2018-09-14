@@ -21,52 +21,62 @@ class Jokes extends Component{
             }).catch(err => console.log(err))
         } else {
             this.props.history.push('/register');
-            alert('you must be logged in to register')
+            alert('you must be logged in to view jokes page')
         }
     }
 
     render(){
         return (
-            <div>
-            <JokesDiv>
-                <h1>Jokes Div</h1>
-                {this.state.jokes &&
-                    this.state.jokes.map(joke => {
-                        return (
-                            <div className="joke" onMouseOver={() => {this.setState({
-                                currentJoke: joke.id})}} key={joke.id}>
-                                <div style={this.state.currentJoke === joke.id ? {display: 'flex'} : {display: 'none'}}>{joke.punchline}</div>
+            <React.Fragment>
+                <JokesDiv>
+                    <h1>Jokes!</h1>
+                    <div className="jokes">
+                        {this.state.jokes &&
+                            this.state.jokes.map(joke => {
+                                return (
+                                    <div className="joke" onMouseOver={() => {this.setState({
+                                        currentJoke: joke.id})}} onMouseLeave={() => {this.setState({
+                                        currentJoke: null})}} key={joke.id}>
+                                        <div style={this.state.currentJoke === joke.id ? {display: 'flex'} : {display: 'none'}}>{joke.punchline}</div>
 
-                                <div style={this.state.currentJoke === joke.id ? {display: 'none'} : {display: 'flex'}}>{joke.setup}</div>
-                            </div>
-                        )
-                    })}
-            </JokesDiv>
-        </div>
-    )
-}
+                                        <div style={this.state.currentJoke === joke.id ? {display: 'none'} : {display: 'flex'}}>{joke.setup}</div>
+                                    </div>
+                                )
+                        })}
+                    </div>
+                </JokesDiv>
+            </React.Fragment>
+        )
+    }
 }
 
 export default Jokes;
 
 const JokesDiv = styled.div`
-    border: 1px solid green;
+    border: 1px solid black;
     background: grey;
     color: black;
+    width: 50%;
     display: flex; 
-    justify-content: space-around
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     flex-wrap: wrap; 
-    .joke{
-        width: 150px;
-        height: 100px;
-        background: white;
-        color: black;
-        border: 1px solid black;
-        margin: 10px;
-        padding: 10px;
+    .jokes {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
+        .joke{
+            width: 70%;
+            height: 100px;
+            background: white;
+            color: black;
+            border: 1px solid black;
+            margin: 10px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 `;

@@ -13,15 +13,15 @@ class Register extends Component{
 
     register = (e) => {
         e.preventDefault();
-        console.log('register')
         axios.post('http://localhost:3300/api/register', this.state).then(res => {
             localStorage.setItem('jwtoken', res.data.token)
+            this.props.history.push('/jokes');
         })
         this.setState({
             username: '',
             password: '',
         })
-        this.props.history.push('/jokes');
+        
     }
 
     inputHandler = (e) => {

@@ -59,7 +59,7 @@ const AppDiv = styled.div`
   flex-direction: column;
   align-items: center;
   .links{
-    border: 1px solid blue;
+    ${'' /* border: 1px solid black; */}
     margin: 10px;
     height: 50px;
     width: 50%;
@@ -75,7 +75,7 @@ const AppDiv = styled.div`
       height: 100%;
       width: 25%;
       background: grey;
-      border: 1px solid green;
+      border: 1px solid black;
       &:hover{
         color: lightgray;
       }
