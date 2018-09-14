@@ -20,7 +20,6 @@ module.exports = server => {
   })
 };
 
-
 function generateToken(user){
   
   const payload = {
@@ -37,7 +36,7 @@ function generateToken(user){
 function register(req, res) {
   // implement user registration
   const user = req.body
-  const hash = bcrypt.hashSync(user.password, 4);
+  const hash = bcrypt.hashSync(user.password, 12);
   user.password = hash
   db('users')
     .insert(user)
@@ -50,7 +49,7 @@ function register(req, res) {
           })
           .catch(err => console.log(err))
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log(err.message))//more descriptive
 }
 
 function login(req, res) {
@@ -66,8 +65,10 @@ function login(req, res) {
       } else {
         res.status(400).json({message: 'invalid username or password'})
       }
-
-    }).catch(err => console.log(err))
+    }).catch(err => {
+      res.status(400).send({message: 'username or password do not match records'})
+    }
+    )
 
 }
 
