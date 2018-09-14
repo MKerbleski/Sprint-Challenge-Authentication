@@ -21,6 +21,7 @@ class App extends Component {
 
   logout = event => {
     console.log('logout')
+    localStorage.removeItem('jwtoken')
   }
 
   render(){
@@ -42,10 +43,7 @@ class App extends Component {
           }} />
            
 
-          <Route path="/login" render={(props) => {
-              return (<Login />)
-            }} />
-
+          <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/jokes" component={Jokes} />
         </AppDiv>
