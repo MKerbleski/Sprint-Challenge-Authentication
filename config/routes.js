@@ -1,19 +1,64 @@
 const axios = require('axios');
+const bcrypt = require('bcrypt');
 
 const { authenticate } = require('./middlewares');
+
+const secret = require('../_secrets/keys.js');
+const jwt = require('jsonwebtoken');
+
+const db = require('../database/dbConfig');
 
 module.exports = server => {
   server.post('/api/register', register);
   server.post('/api/login', login);
   server.get('/api/jokes', authenticate, getJokes);
+  server.get('/api/', (req, res) => {
+    res.status(200).send("API running")
+  })
+  server.get('/', (req, res) => {
+    res.status(200).send("API running")
+  })
 };
+
+
+function generateToken(user){
+  console.log(secret)
+  const payload = {
+    username: user.username
+  }
+  const options = {
+    expiresIn: '2d',
+    jwtid:'54321',
+  }
+  return jwt.sign(payload, secret.jwtkey, options)
+}
+
 
 function register(req, res) {
   // implement user registration
+  console.log(req.body)
+  const user = req.body
+  const hash = bcrypt.hashSync(user.password, 4);
+  user.password = hash
+  console.log(user)
+  db('users')
+    .insert(user)
+    .then(id => {
+      res.status(201).send(id)
+        db('users')
+          .where({id})
+          .then(user => {
+            const token = generateToken(user)
+            console.log(token)
+          })
+          .catch(err => console.log(err))
+    })
+    .catch(err => console.log(err))
 }
 
 function login(req, res) {
   // implement user login
+
 }
 
 function getJokes(req, res) {
