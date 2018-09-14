@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const { authenticate } = require('./middlewares');
 
-const secret = require('../_secrets/keys.js');
+const {jwtKey} = require('../_secrets/keys.js');
 const jwt = require('jsonwebtoken');
 
 const db = require('../database/dbConfig');
@@ -16,13 +16,13 @@ module.exports = server => {
     res.status(200).send("API running")
   })
   server.get('/', (req, res) => {
-    res.status(200).send("API running")
+    res.status(200).send('API Running')
   })
 };
 
 
 function generateToken(user){
-  console.log(secret)
+  
   const payload = {
     username: user.username
   }
@@ -30,7 +30,7 @@ function generateToken(user){
     expiresIn: '2d',
     jwtid:'54321',
   }
-  return jwt.sign(payload, secret.jwtkey, options)
+  return jwt.sign(payload, jwtKey, options)
 }
 
 
@@ -44,12 +44,12 @@ function register(req, res) {
   db('users')
     .insert(user)
     .then(id => {
-      res.status(201).send(id)
         db('users')
           .where({id})
           .then(user => {
             const token = generateToken(user)
             console.log(token)
+            res.status(200).json({message: 'token created', token: token})
           })
           .catch(err => console.log(err))
     })
