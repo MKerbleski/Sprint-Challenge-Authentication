@@ -1,5 +1,5 @@
-import React, { Component, Routes} from 'react';
-import { Link } from 'react-router-dom'
+import React, { Component} from 'react';
+import { Link, withRouter, Route } from 'react-router-dom'
 import styled from 'styled-components'
 
 
@@ -23,27 +23,38 @@ class App extends Component {
     console.log('logout')
   }
 
-  render() {
+  render(){
     return (
       <div>
         <AppDiv>
-          <h1>App Div</h1>
-          <div className="links">
-            <Link to="/register" onClick={this.logout}>Logout</Link>
-            <Link to="/register" >Register</Link>
-            <Link to="/login" >Login</Link>
-            <Link to="/jokes" >Jokes</Link>
-          </div>
-          <Routes path="/register" component={Register} />
-          <Routes path="/login" component={Login} />
-          <Routes path="/jokes" component={Jokes} />
+                <h1>App Div</h1>
+          <Route path="/" render={() => {
+            return (
+              <div>
+                <div className="links">
+                  <Link to="/register" onClick={this.logout}>Logout</Link>
+                  <Link to="/register" >Register</Link>
+                  <Link to="/login" >Login</Link>
+                  <Link to="/jokes" >Jokes</Link>
+                </div>
+              </div>
+            )
+          }} />
+           
+
+          <Route path="/login" render={(props) => {
+              return (<Login />)
+            }} />
+
+          <Route path="/register" component={Register} />
+          <Route path="/jokes" component={Jokes} />
         </AppDiv>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
 
 const AppDiv = styled.div`
   background: black;
