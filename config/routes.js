@@ -36,11 +36,9 @@ function generateToken(user){
 
 function register(req, res) {
   // implement user registration
-  console.log(req.body)
   const user = req.body
   const hash = bcrypt.hashSync(user.password, 4);
   user.password = hash
-  console.log(user)
   db('users')
     .insert(user)
     .then(id => {
@@ -48,8 +46,7 @@ function register(req, res) {
           .where({id})
           .then(user => {
             const token = generateToken(user)
-            console.log(token)
-            res.status(200).json({message: 'token created', token: token})
+            res.status(201).json({message: 'user created. token created', token: token})
           })
           .catch(err => console.log(err))
     })
@@ -58,6 +55,19 @@ function register(req, res) {
 
 function login(req, res) {
   // implement user login
+  const loginContent = req.body
+  db('users')
+    .where({username: loginContent.username})
+    .first()
+    .then(dbUser => {
+      if (dbUser && bcrypt.compareSync(loginContent.password, dbUser.password)){
+        const token = generateToken(dbUser)
+        res.status(200).json({message: 'user logged in. token created', token: token})
+      } else {
+        res.status(400).json({message: 'invalid username or password'})
+      }
+
+    }).catch(err => console.log(err))
 
 }
 
