@@ -14,7 +14,7 @@ class App extends Component {
 
   render(){
     return (
-      <div>
+      <React.Fragment>
         <AppDiv>
           <h1>App Div</h1>
           <Route path="/" render={() => {
@@ -28,12 +28,11 @@ class App extends Component {
             )
           }} />
            
-
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/jokes" component={Jokes} />
         </AppDiv>
-      </div>
+      </React.Fragment>
     );
   }
 }

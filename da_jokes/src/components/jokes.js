@@ -31,17 +31,25 @@ class Jokes extends Component{
                 <JokesDiv>
                     <h1>Jokes!</h1>
                     <div className="jokes">
+                        <div className="buttons">
+                        {/* style={this.state.button === this.value ? {background: "gray"} : {background: "red"}} */}
+                            <div>KnockKnock</div>
+                            <div>General</div>
+                            <div>Programming</div>
+                        </div>
                         {this.state.jokes &&
                             this.state.jokes.map(joke => {
                                 return (
-                                    <div className="joke" onMouseOver={() => {this.setState({
-                                        currentJoke: joke.id})}} onMouseLeave={() => {this.setState({
-                                        currentJoke: null})}} key={joke.id}>
+                                    <div 
+                                        className="joke" 
+                                        onMouseOver={() => {this.setState({
+                                            currentJoke: joke.id})}} 
+                                        onMouseLeave={() => {this.setState({
+                                            currentJoke: null})}} 
+                                        key={joke.id}>
                                         <div style={this.state.currentJoke === joke.id ? {display: 'flex'} : {display: 'none'}}>{joke.punchline}</div>
-
                                         <div style={this.state.currentJoke === joke.id ? {display: 'none'} : {display: 'flex'}}>{joke.setup}</div>
-                                    </div>
-                                )
+                                    </div>)
                         })}
                     </div>
                 </JokesDiv>
@@ -62,6 +70,25 @@ const JokesDiv = styled.div`
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap; 
+    .buttons{
+        width: 80%;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        div{
+            width: 33.33%;
+            background: gray;
+            border: 1px solid black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:hover{
+                color: black;
+                background: lightgray;
+            }
+        }
+    }
     .jokes {
         display: flex;
         flex-direction: column;

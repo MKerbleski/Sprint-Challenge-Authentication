@@ -21,8 +21,6 @@ class Login extends Component{
             username: '',
             password: '',
         })
-        
-
     }
 
     inputHandler = (e) => {

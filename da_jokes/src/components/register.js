@@ -21,7 +21,6 @@ class Register extends Component{
             username: '',
             password: '',
         })
-        
     }
 
     inputHandler = (e) => {
