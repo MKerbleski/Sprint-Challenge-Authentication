@@ -59,15 +59,25 @@ const AppDiv = styled.div`
   flex-direction: column;
   align-items: center;
   .links{
+    border: 1px solid blue;
+    margin: 10px;
+    height: 50px;
+    width: 50%;
+    display: flex;
+    justify-content:space-between;
     .link{
-      color: red;
+      color: white;
       text-decoration: none;
-      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      ${'' /* padding: 20px; */}
+      height: 100%;
       width: 25%;
       background: grey;
-      border: 1px solid white;
+      border: 1px solid green;
       &:hover{
-        color: white;
+        color: lightgray;
       }
     }
   }

@@ -33,16 +33,16 @@ class Login extends Component{
 
     render(){
         return (
-            <div>
+            <React.Fragment>
             <LoginDiv>
-                <h1>Login Div</h1>
+                <h1>Login</h1>
                 <form onSubmit={this.login}>
                     <input type="text" value={this.state.username} name="username" placeholder='username' onChange={this.inputHandler}>{this.value}</input>
                     <input type="password" value={this.state.pasword} name="password" placeholder='password' onChange={this.inputHandler}>{this.value}</input>
-                    <button>Register</button>
+                    <button>Login</button>
                 </form>
             </LoginDiv>
-        </div>
+        </React.Fragment>
     )
 }
 }
@@ -53,4 +53,13 @@ const LoginDiv = styled.div`
     border: 1px solid green;
     background: grey;
     color: black;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 `;

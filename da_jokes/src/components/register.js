@@ -32,18 +32,18 @@ class Register extends Component{
 
     render(){
         return (
-            <div>
-            <RegisterDiv>
-                <h1>Register Div</h1>
-                <form onSubmit={this.register}>
-                    <input type="text" value={this.state.username} name="username" placeholder='username' onChange={this.inputHandler}>{this.value}</input>
-                    <input type="password" value={this.state.pasword} name="password" placeholder='password' onChange={this.inputHandler}>{this.value}</input>
-                    <button>Register</button>
-                </form>
-            </RegisterDiv>
-        </div>
-    )
-}
+            <React.Fragment>
+                <RegisterDiv>
+                    <h1>Register</h1>
+                    <form onSubmit={this.register}>
+                        <input type="text" value={this.state.username} name="username" placeholder='username' onChange={this.inputHandler}>{this.value}</input>
+                        <input type="password" value={this.state.pasword} name="password" placeholder='password' onChange={this.inputHandler}>{this.value}</input>
+                        <button>Register</button>
+                    </form>
+                </RegisterDiv>
+            </React.Fragment>
+        )
+    }
 }
 
 export default Register;
@@ -52,4 +52,13 @@ const RegisterDiv = styled.div`
     border: 1px solid green;
     background: grey;
     color: black;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 `;
