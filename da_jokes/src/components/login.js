@@ -13,7 +13,6 @@ class Login extends Component{
 
     login = (e) => {
         e.preventDefault();
-        console.log('login')
         axios.post('http://localhost:3300/api/login', this.state).then(res => {
             localStorage.setItem('jwtoken', res.data.token)
             this.props.history.push('/jokes');

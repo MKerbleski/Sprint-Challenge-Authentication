@@ -8,19 +8,7 @@ import Login from './components/login';
 import Jokes from './components/jokes';
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-
-    }
-  }
-  
-  componentDidMount(){
-    console.log("CDM");
-  }
-
   logout = event => {
-    console.log('logout')
     localStorage.removeItem('jwtoken')
   }
 
