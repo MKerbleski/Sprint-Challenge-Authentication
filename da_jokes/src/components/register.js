@@ -22,7 +22,6 @@ class Register extends Component{
             password: '',
         })
         this.props.history.push('/jokes');
-
     }
 
     inputHandler = (e) => {

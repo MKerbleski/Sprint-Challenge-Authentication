@@ -28,17 +28,15 @@ class App extends Component {
     return (
       <div>
         <AppDiv>
-                <h1>App Div</h1>
+          <h1>App Div</h1>
           <Route path="/" render={() => {
             return (
-              <div>
                 <div className="links">
-                  <Link to="/register" onClick={this.logout}>Logout</Link>
-                  <Link to="/register" >Register</Link>
-                  <Link to="/login" >Login</Link>
-                  <Link to="/jokes" >Jokes</Link>
+                  <Link to="/register" className="link" onClick={this.logout}>Logout</Link>
+                  <Link to="/register" className="link">Register</Link>
+                  <Link to="/login" className="link">Login</Link>
+                  <Link to="/jokes" className="link">Jokes</Link>
                 </div>
-              </div>
             )
           }} />
            
@@ -55,8 +53,22 @@ class App extends Component {
 export default withRouter(App);
 
 const AppDiv = styled.div`
-  background: black;
-  color: white;
-  height: 100vh;
-  width: 100vw;
+  background: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .links{
+    .link{
+      color: red;
+      text-decoration: none;
+      padding: 20px;
+      width: 25%;
+      background: grey;
+      border: 1px solid white;
+      &:hover{
+        color: white;
+      }
+    }
+  }
 `;

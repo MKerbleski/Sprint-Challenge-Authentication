@@ -21,6 +21,7 @@ class Jokes extends Component{
             }).catch(err => console.log(err))
         } else {
             this.props.history.push('/register');
+            alert('you must be logged in to register')
         }
     }
 
